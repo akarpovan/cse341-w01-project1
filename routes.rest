@@ -1,0 +1,51 @@
+// ============================
+// Environment variables
+// ============================
+@dev = http://localhost:3000
+@prod = https://cse341-w01-project1.onrender.com
+
+
+// ============================
+// DEVELOPMENT ENVIRONMENT (local)
+// ============================
+
+### Get all contacts
+GET {{dev}}/contacts
+
+### Get a single contact by id (Anna Karpova)
+GET {{dev}}/contacts/6a9c9d1ea0bc0d87f2c194d0
+
+### Get a single contact by id (John Smith)
+GET {{dev}}/contacts/6a9c9d1ea0bc0d87f2c194d1
+
+### Retrieve a single contact by id (Maria Gonzalez)
+GET {{dev}}/contacts/6a9c9d1ea0bc0d87f2c194d2
+
+### Test with an id in an invalid format (should fail / result in a controlled error)
+GET {{dev}}/contacts/123
+
+### Try using an ID that is valid in format but does not exist in the database.
+GET {{dev}}/contacts/000000000000000000000000
+
+
+// ============================
+// PRODUCTION ENVIRONMENT (Render)
+// ============================
+
+### Get all contacts
+GET {{prod}}/contacts
+
+### Get a single contact by id (Anna Karpova)
+GET {{prod}}/contacts/6a9c9d1ea0bc0d87f2c194d0
+
+### Get a single contact by id (John Smith)
+GET {{prod}}/contacts/6a9c9d1ea0bc0d87f2c194d1
+
+### Retrieve a single contact by id (Maria Gonzalez)
+GET {{prod}}/contacts/6a9c9d1ea0bc0d87f2c194d2
+
+### Test with an id in an invalid format (should fail / result in a controlled error)
+GET {{prod}}/contacts/123
+
+### Try using an ID that is valid in format but does not exist in the database.
+GET {{prod}}/contacts/000000000000000000000000

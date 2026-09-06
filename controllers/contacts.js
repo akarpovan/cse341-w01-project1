@@ -11,13 +11,20 @@ const getAll = async (req, res) => {
 };
 
 const getSingle = async (req, res) => {
-    const contactId = new Objectid(req.params.id);
-    const result = await mongodb.getDatabase().db().collection('contacts').find({ _id: contactId });
-    result.toArray().then((contacts) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(contacts[0]);
+    try {
+        const contactId = new Objectid(req.params.id);
+        const result = await mongodb.getDatabase().db().collection('contacts').find({ _id: contactId });
+        result.toArray().then((contacts) => {
+            if (!contacts[0]) {
+                return res.status(404).json({ message: 'Contact not found' });
+            }
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).json(contacts[0]);
 
-    });
+        });
+    } catch (error) {
+        res.status(400).json({ message: 'Invalid contact id format' });
+    }
 };
 
 module.exports = {
