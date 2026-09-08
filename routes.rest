@@ -27,6 +27,40 @@ GET {{dev}}/contacts/123
 ### Try using an ID that is valid in format but does not exist in the database.
 GET {{dev}}/contacts/000000000000000000000000
 
+### create contact
+# @name createContactDev
+POST {{dev}}/contacts HTTP/1.1
+content-type: application/json
+
+{
+    "firstName": "Ashley2",
+    "lastName": "Weaver",
+    "email": "aweaver@test.com",
+    "favoriteColor": "Brown",
+    "birthday": "2000-06-19"
+}
+
+### update contact
+PUT {{dev}}/contacts/{{createContactDev.response.body.id}} HTTP/1.1
+content-type: application/json
+
+{
+ "firstName": "Ashley",
+"lastName": "Weaver",
+"email": "aweaver@test.com",
+"favoriteColor": "Green",
+"birthday": "2000-06-28"
+}
+
+### verify the update
+GET {{dev}}/contacts/{{createContactDev.response.body.id}}
+
+### delete contact (usa automáticamente el id devuelto por el POST de arriba)
+DELETE {{dev}}/contacts/{{createContactDev.response.body.id}}
+
+### verify the delete (should return 404 / empty)
+GET {{dev}}/contacts/{{createContactDev.response.body.id}}
+
 
 // ============================
 // PRODUCTION ENVIRONMENT (Render)
@@ -49,3 +83,37 @@ GET {{prod}}/contacts/123
 
 ### Try using an ID that is valid in format but does not exist in the database.
 GET {{prod}}/contacts/000000000000000000000000
+
+### create contact
+# @name createContactProd
+POST {{prod}}/contacts HTTP/1.1
+content-type: application/json
+
+{
+    "firstName": "Ashley",
+    "lastName": "Weaver",
+    "email": "aweaver@test.com",
+    "favoriteColor": "Brown",
+    "birthday": "2000-06-19"
+}
+
+### update contact (usa automáticamente el id devuelto por el POST de arriba)
+PUT {{prod}}/contacts/{{createContactProd.response.body.id}} HTTP/1.1
+content-type: application/json
+
+{
+    "firstName": "Ashley",
+    "lastName": "Weaver",
+    "email": "aweaver@test.com",
+    "favoriteColor": "Green",
+    "birthday": "2000-06-28"
+}
+
+### verify the update
+GET {{prod}}/contacts/{{createContactProd.response.body.id}}
+
+### delete contact (usa automáticamente el id devuelto por el POST de arriba)
+DELETE {{prod}}/contacts/{{createContactProd.response.body.id}}
+
+### verify the delete (should return 404 / empty)
+GET {{prod}}/contacts/{{createContactProd.response.body.id}}

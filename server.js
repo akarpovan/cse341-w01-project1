@@ -1,10 +1,12 @@
 const express = require('express'); //libreria
+const bodyParser = require('body-parser');
 const mongodb = require('./data/database');
 
 const app = express(); //funcion
 
 const port = process.env.PORT || 3000;
 
+app.use(bodyParser.json());
 app.use('/', require('./routes'));
 
 mongodb.initDb((err) => {
