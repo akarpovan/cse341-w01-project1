@@ -3,6 +3,8 @@
 // ============================
 @dev = http://localhost:3000
 @prod = https://cse341-w01-project1.onrender.com
+@contentType = application/json
+
 
 
 // ============================
@@ -30,7 +32,7 @@ GET {{dev}}/contacts/000000000000000000000000
 ### create contact
 # @name createContactDev
 POST {{dev}}/contacts HTTP/1.1
-content-type: application/json
+content-type: {{contentType}}
 
 {
     "firstName": "Ashley2",
@@ -42,7 +44,7 @@ content-type: application/json
 
 ### update contact
 PUT {{dev}}/contacts/{{createContactDev.response.body.id}} HTTP/1.1
-content-type: application/json
+content-type: {{contentType}}
 
 {
  "firstName": "Ashley",
@@ -60,6 +62,9 @@ DELETE {{dev}}/contacts/{{createContactDev.response.body.id}}
 
 ### verify the delete (should return 404 / empty)
 GET {{dev}}/contacts/{{createContactDev.response.body.id}}
+
+### delete contact 
+DELETE {{dev}}/contacts/6a9f86ae4f6dd5336e138aad
 
 
 // ============================
@@ -87,22 +92,22 @@ GET {{prod}}/contacts/000000000000000000000000
 ### create contact
 # @name createContactProd
 POST {{prod}}/contacts HTTP/1.1
-content-type: application/json
+content-type: {{contentType}}
 
 {
-    "firstName": "Ashley",
+    "firstName": "Ashley2",
     "lastName": "Weaver",
     "email": "aweaver@test.com",
     "favoriteColor": "Brown",
     "birthday": "2000-06-19"
 }
 
-### update contact (usa automáticamente el id devuelto por el POST de arriba)
+### update contact 
 PUT {{prod}}/contacts/{{createContactProd.response.body.id}} HTTP/1.1
-content-type: application/json
+content-type: {{contentType}}
 
 {
-    "firstName": "Ashley",
+    "firstName": "Ashley2",
     "lastName": "Weaver",
     "email": "aweaver@test.com",
     "favoriteColor": "Green",
@@ -117,3 +122,6 @@ DELETE {{prod}}/contacts/{{createContactProd.response.body.id}}
 
 ### verify the delete (should return 404 / empty)
 GET {{prod}}/contacts/{{createContactProd.response.body.id}}
+
+### delete contact
+DELETE {{prod}}/contacts/6a9f860a0c9b3110b90877ba
