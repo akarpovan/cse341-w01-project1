@@ -2,9 +2,8 @@ const express = require('express'); //libreria
 const bodyParser = require('body-parser');
 const mongodb = require('./data/database');
 
-const app = express(); //funcion
-
 const port = process.env.PORT || 3000;
+const app = express(); //funcion
 
 app.use(bodyParser.json());
 app.use((req, res, next) => {
@@ -15,6 +14,11 @@ app.use((req, res, next) => {
     next();
 });
 app.use('/', require('./routes'));
+
+process.on('uncaughtException', (err, origin) => {
+    console.log(process.stderr.fd, `CaughtException: ${err}/n` + `Exception origin: ${origin}`);
+});
+
 
 mongodb.initDb((err) => {
     if (err) {
